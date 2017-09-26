@@ -58,6 +58,10 @@ variable "rds_storage_type" {
 
 variable "rds_version" {}
 
+variable "replicate_source_db" {
+  default = ""
+}
+
 variable "subnet_ids" {
   type = "list"
 }

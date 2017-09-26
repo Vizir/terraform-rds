@@ -57,6 +57,7 @@ resource "aws_db_instance" "default" {
   publicly_accessible     = "${var.publicly_accessible}"
   port                    = "${var.db_port}"
   storage_type            = "${var.rds_storage_type}"
+  replicate_source_db     = "${var.replicate_source_db}"
   username                = "${var.db_username}"
   vpc_security_group_ids  = ["${aws_security_group.rds.id}"]
 }
