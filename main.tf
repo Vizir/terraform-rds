@@ -21,7 +21,7 @@ resource "aws_rds_cluster" "default" {
   cluster_identifier           = "${var.identifier}"
   count                        = "${lookup(map("0", "0"), var.aurora_instance_count, 1)}"
   database_name                = "${var.db_name}"
-  db_subnet_group_name         = "${aws_db_subnet_group.rds.id}"
+  db_subnet_group_name         = "${aws_db_subnet_group.rds.0.id}"
   master_password              = "${var.db_password}"
   master_username              = "${var.db_username}"
   port                         = "${var.db_port}"
@@ -33,7 +33,7 @@ resource "aws_rds_cluster" "default" {
 resource "aws_rds_cluster_instance" "cluster_instances" {
   cluster_identifier   = "${aws_rds_cluster.default.0.id}"
   count                = "${var.aurora_instance_count}"
-  db_subnet_group_name = "${aws_db_subnet_group.rds.id}"
+  db_subnet_group_name = "${aws_db_subnet_group.rds.0.id}"
   identifier           = "${var.identifier}-${count.index}"
   instance_class       = "${var.instance_class}"
   publicly_accessible  = "${var.publicly_accessible}"
@@ -45,7 +45,7 @@ resource "aws_db_instance" "default" {
   backup_retention_period = "${var.backup_retention_period_in_days}"
   backup_window           = "${var.backup_window}"
   count                   = "${var.rds_instance_count}"
-  db_subnet_group_name    = "${aws_db_subnet_group.rds.id}"
+  db_subnet_group_name    = "${join("", aws_db_subnet_group.rds.*.name)}"
   engine                  = "${var.rds_engine}"
   engine_version          = "${var.rds_version}"
   identifier              = "${var.identifier}"
@@ -63,6 +63,7 @@ resource "aws_db_instance" "default" {
 }
 
 resource "aws_db_subnet_group" "rds" {
+  count      = "${var.replicate_source_db == "" ? 1 : 0}"
   name       = "${var.identifier}"
   subnet_ids = ["${var.subnet_ids}"]
 }

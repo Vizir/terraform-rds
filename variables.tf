@@ -59,7 +59,8 @@ variable "rds_storage_type" {
 variable "rds_version" {}
 
 variable "replicate_source_db" {
-  default = ""
+  default     = ""
+  description = "Treat this database as a read replica and use this value as the database to replicate. Do not use for Aurora. Aurora has its own replication mechanism."
 }
 
 variable "subnet_ids" {
