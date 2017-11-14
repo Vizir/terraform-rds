@@ -36,6 +36,10 @@ variable "publicly_accessible" {
   default = false
 }
 
+variable "parameter_group_name" {
+  description = "RDS parameter group to use"
+}
+
 variable "rds_engine" {
   description = "DB Engine to use in RDS (Postgres, Mysql, etc) unless using AWS Aurora"
 }

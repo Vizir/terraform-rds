@@ -53,11 +53,12 @@ resource "aws_db_instance" "default" {
   maintenance_window      = "${var.maintenance_window}"
   multi_az                = "${var.rds_multi_az}"
   name                    = "${var.db_name}"
+  parameter_group_name    = "${var.parameter_group_name}"
   password                = "${var.db_password}"
-  publicly_accessible     = "${var.publicly_accessible}"
   port                    = "${var.db_port}"
-  storage_type            = "${var.rds_storage_type}"
+  publicly_accessible     = "${var.publicly_accessible}"
   replicate_source_db     = "${var.replicate_source_db}"
+  storage_type            = "${var.rds_storage_type}"
   username                = "${var.db_username}"
   vpc_security_group_ids  = ["${aws_security_group.rds.id}"]
 }
