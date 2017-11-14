@@ -67,6 +67,11 @@ variable "replicate_source_db" {
   description = "Treat this database as a read replica and use this value as the database to replicate. Do not use for Aurora. Aurora has its own replication mechanism."
 }
 
+variable "skip_final_snapshot" {
+  description = "Determines if a final snapshot should NOT be created before destroying the instance. Should be false for production environments"
+  default     = false
+}
+
 variable "subnet_ids" {
   type = "list"
 }

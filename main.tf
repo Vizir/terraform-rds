@@ -37,6 +37,7 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   identifier           = "${var.identifier}-${count.index}"
   instance_class       = "${var.instance_class}"
   publicly_accessible  = "${var.publicly_accessible}"
+  skip_final_snapshot  = "${var.skip_final_snapshot}"
 }
 
 resource "aws_db_instance" "default" {
@@ -58,6 +59,7 @@ resource "aws_db_instance" "default" {
   port                    = "${var.db_port}"
   publicly_accessible     = "${var.publicly_accessible}"
   replicate_source_db     = "${var.replicate_source_db}"
+  skip_final_snapshot     = "${var.skip_final_snapshot}"
   storage_type            = "${var.rds_storage_type}"
   username                = "${var.db_username}"
   vpc_security_group_ids  = ["${aws_security_group.rds.id}"]
