@@ -51,6 +51,7 @@ resource "aws_db_instance" "default" {
   engine_version          = "${var.rds_version}"
   identifier              = "${var.identifier}"
   instance_class          = "${var.instance_class}"
+  iops                    = "${var.iops}"
   maintenance_window      = "${var.maintenance_window}"
   multi_az                = "${var.rds_multi_az}"
   name                    = "${var.db_name}"

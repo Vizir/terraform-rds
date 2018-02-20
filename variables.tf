@@ -30,6 +30,11 @@ variable "instance_class" {
   description = "RDS instance type (db.t2.small, db.r3.large, etc)"
 }
 
+variable "iops" {
+  default     = 0
+  description = "Amount of provisioned IOPS. Set your storage class to io1 to use this"
+}
+
 variable "maintenance_window" {}
 
 variable "publicly_accessible" {
