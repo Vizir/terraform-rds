@@ -11,7 +11,7 @@ output "db_port" {
 }
 
 output "db_identifier" {
-  value = "${aws_db_instance.default.identifier}"
+  value = "${aws_db_instance.default.0.identifier}"
 }
 
 output "db_security_group_id" {
