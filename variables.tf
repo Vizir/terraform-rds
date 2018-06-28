@@ -77,6 +77,11 @@ variable "skip_final_snapshot" {
   default     = false
 }
 
+variable "snapshot_identifier" {
+  description = "Specify this to use a snapshot to create the database instance."
+  default     = ""
+}
+
 variable "subnet_ids" {
   type = "list"
 }
