@@ -9,9 +9,7 @@ resource "aws_security_group" "rds" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
-    Name = "rds-${var.identifier}"
-  }
+  tags = "${merge(var.tags, map("Name", format("rds-%s", var.identifier)))}"
 }
 
 resource "aws_rds_cluster" "default" {
@@ -28,6 +26,7 @@ resource "aws_rds_cluster" "default" {
   preferred_backup_window      = "${var.backup_window}"
   preferred_maintenance_window = "${var.maintenance_window}"
   snapshot_identifier          = "${var.snapshot_identifier}"
+  tags                         = "${var.tags}"
   vpc_security_group_ids       = ["${aws_security_group.rds.id}"]
 }
 
@@ -39,6 +38,7 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   instance_class       = "${var.instance_class}"
   publicly_accessible  = "${var.publicly_accessible}"
   skip_final_snapshot  = "${var.skip_final_snapshot}"
+  tags                 = "${var.tags}"
 }
 
 resource "aws_db_instance" "default" {
@@ -64,6 +64,7 @@ resource "aws_db_instance" "default" {
   skip_final_snapshot     = "${var.skip_final_snapshot}"
   snapshot_identifier     = "${var.snapshot_identifier}"
   storage_type            = "${var.rds_storage_type}"
+  tags                    = "${var.tags}"
   username                = "${var.db_username}"
   vpc_security_group_ids  = ["${aws_security_group.rds.id}"]
 }
@@ -72,4 +73,5 @@ resource "aws_db_subnet_group" "rds" {
   count      = "${var.replicate_source_db == "" ? 1 : 0}"
   name       = "${var.identifier}"
   subnet_ids = ["${var.subnet_ids}"]
+  tags       = "${var.tags}"
 }

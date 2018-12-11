@@ -86,4 +86,9 @@ variable "subnet_ids" {
   type = "list"
 }
 
+variable "tags" {
+  default     = {}
+  description = "Tags to apply to created resources"
+}
+
 variable "vpc_id" {}
