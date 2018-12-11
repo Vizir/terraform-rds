@@ -22,6 +22,10 @@ variable "db_port" {}
 
 variable "db_username" {}
 
+variable "deletion_protection" {
+  default = false
+}
+
 variable "identifier" {
   description = "Identifier to show in RDS API"
 }
