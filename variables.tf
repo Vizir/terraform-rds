@@ -12,6 +12,8 @@ variable "backup_retention_period_in_days" {}
 
 variable "backup_window" {}
 
+variable "copy_tags_to_snapshot" {}
+
 variable "db_name" {
   description = "Initial db name for RDS to create"
 }

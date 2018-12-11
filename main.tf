@@ -32,14 +32,15 @@ resource "aws_rds_cluster" "default" {
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
-  cluster_identifier   = "${aws_rds_cluster.default.0.id}"
-  count                = "${var.aurora_instance_count}"
-  db_subnet_group_name = "${aws_db_subnet_group.rds.0.id}"
-  identifier           = "${var.identifier}-${count.index}"
-  instance_class       = "${var.instance_class}"
-  publicly_accessible  = "${var.publicly_accessible}"
-  skip_final_snapshot  = "${var.skip_final_snapshot}"
-  tags                 = "${var.tags}"
+  cluster_identifier    = "${aws_rds_cluster.default.0.id}"
+  copy_tags_to_snapshot = "${var.copy_tags_to_snapshot}"
+  count                 = "${var.aurora_instance_count}"
+  db_subnet_group_name  = "${aws_db_subnet_group.rds.0.id}"
+  identifier            = "${var.identifier}-${count.index}"
+  instance_class        = "${var.instance_class}"
+  publicly_accessible   = "${var.publicly_accessible}"
+  skip_final_snapshot   = "${var.skip_final_snapshot}"
+  tags                  = "${var.tags}"
 }
 
 resource "aws_db_instance" "default" {
@@ -47,6 +48,7 @@ resource "aws_db_instance" "default" {
   apply_immediately       = "${var.apply_immediately}"
   backup_retention_period = "${var.backup_retention_period_in_days}"
   backup_window           = "${var.backup_window}"
+  copy_tags_to_snapshot   = "${var.copy_tags_to_snapshot}"
   count                   = "${var.rds_instance_count}"
   db_subnet_group_name    = "${join("", aws_db_subnet_group.rds.*.name)}"
   deletion_protection     = "${var.deletion_protection}"
