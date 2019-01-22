@@ -51,6 +51,11 @@ variable "parameter_group_name" {
   description = "RDS parameter group to use"
 }
 
+variable "rds_allow_major_version_upgrade" {
+  description = "Indicates that major version upgrades are allowed. Use only if you need to upgrade database to a major version."
+  default     = false
+}
+
 variable "rds_engine" {
   description = "DB Engine to use in RDS (Postgres, Mysql, etc) unless using AWS Aurora"
 }
@@ -98,8 +103,3 @@ variable "tags" {
 }
 
 variable "vpc_id" {}
-
-variable "rds_allow_major_version_upgrade" {
-  description = "Indicates that major version upgrades are allowed. Use only if you need to upgrade database to a major version."
-  default     = false
-}

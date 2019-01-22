@@ -45,6 +45,7 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
 
 resource "aws_db_instance" "default" {
   allocated_storage           = "${var.rds_storage}"
+  allow_major_version_upgrade = "${var.rds_allow_major_version_upgrade}"
   apply_immediately           = "${var.apply_immediately}"
   backup_retention_period     = "${var.backup_retention_period_in_days}"
   backup_window               = "${var.backup_window}"
@@ -71,7 +72,6 @@ resource "aws_db_instance" "default" {
   tags                        = "${var.tags}"
   username                    = "${var.db_username}"
   vpc_security_group_ids      = ["${aws_security_group.rds.id}"]
-  allow_major_version_upgrade = "${var.rds_allow_major_version_upgrade}"
 }
 
 resource "aws_db_subnet_group" "rds" {
