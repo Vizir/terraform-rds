@@ -98,3 +98,8 @@ variable "tags" {
 }
 
 variable "vpc_id" {}
+
+variable "rds_allow_major_version_upgrade" {
+  description = "Indicates that major version upgrades are allowed. Use only if you need to upgrade database to a major version."
+  default     = false
+}
